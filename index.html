@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeMaster Pro | Interactive Stopwatch & Clock</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Welcome Dashboard -->
+    <div class="welcome-dashboard animate_animated animate_fadeIn" id="welcomeDashboard">
+        <div class="welcome-card">
+            <div class="logo">
+                <i class="fas fa-stopwatch"></i>
+                <h1>TimeMaster Pro</h1>
+            </div>
+            <p class="tagline">Race against time in style!</p>
+            <div class="input-group">
+                <input type="text" id="userName" placeholder="Enter your champion name" autocomplete="off">
+                <button id="enterBtn" class="pulse">Let's Race! <i class="fas fa-flag-checkered"></i></button>
+           <div class="feature">
+    <i class="fas fa-fire"></i> <!-- Replace torch with fire -->
+    <span>Torch Runner</span>
+</div>
+                <div class="feature">
+                    <i class="fas fa-medal"></i>
+                    <span>Lap Records</span>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-music"></i>
+                    <span>Sound Effects</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (initially hidden) -->
+    <div class="container" id="mainApp" style="display: none;">
+        <audio id="tickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-clock-ticking-1005.mp3" preload="auto"></audio>
+        <audio id="lapSound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-interface-beep-221.mp3" preload="auto"></audio>
+        <audio id="startSound" src="https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3" preload="auto"></audio>
+        <audio id="cheerSound" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" preload="auto"></audio>
+
+        <div class="user-greeting" id="userGreeting"></div>
+
+        <div class="theme-toggle">
+            <button id="themeBtn"><i class="fas fa-moon"></i> Dark Mode</button>
+        </div>
+
+        <div class="clock-container animate_animated animate_fadeInUp">
+            <h1><i class="fas fa-clock"></i> Current Time</h1>
+            <div class="clock" id="clock">00:00:00</div>
+            <div class="date" id="date"></div>
+        </div>
+
+        <div class="stopwatch-container animate_animated animate_fadeInUp">
+            <h1><i class="fas fa-stopwatch"></i> Stopwatch</h1>
+            <div class="stopwatch" id="stopwatch">00:00:00</div>
+            
+            <div class="track-container">
+                <div class="track">
+                    <div class="track-path"></div>
+                    <div class="checkpoint checkpoint-1"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="checkpoint checkpoint-2"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="checkpoint checkpoint-3"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="runner" id="runner">
+                        <div class="mashaal">
+                            <div class="flame"></div>
+                            <div class="flame-inner"></div>
+                            <div class="stick"></div>
+                        </div>
+                    </div>
+                    <div class="sparks" id="sparks"></div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="startBtn" class="btn-success"><i class="fas fa-play"></i> Start</button>
+                <button id="stopBtn" class="btn-warning"><i class="fas fa-pause"></i> Stop</button>
+                <button id="lapBtn" class="btn-info"><i class="fas fa-flag"></i> Lap</button>
+                <button id="resetBtn" class="btn-danger"><i class="fas fa-redo"></i> Reset</button>
+            </div>
+            
+            <div class="stats-container">
+                <div class="stat">
+                    <span class="stat-value" id="lapCount">0</span>
+                    <span class="stat-label">Laps</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="fastestLap">00:00:00</span>
+                    <span class="stat-label">Fastest</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value" id="slowestLap">00:00:00</span>
+                    <span class="stat-label">Slowest</span>
+                </div>
+            </div>
+            
+            <div class="laps-container">
+                <h3><i class="fas fa-history"></i> Lap Times <span class="badge" id="lapBadge">0</span></h3>
+                <div class="laps" id="laps">
+                    <div class="empty-state">
+                        <i class="fas fa-flag"></i>
+                        <p>Your lap times will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="achievements-container" id="achievementsContainer">
+            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+            <div class="achievements" id="achievements">
+                <div class="achievement locked">
+                    <i class="fas fa-lock"></i>
+                    <span>First Lap</span>
+                </div>
+                <div class="achievement locked">
+                    <i class="fas fa-lock"></i>
+                    <span>5 Laps</span>
+                </div>
+                <div class="achievement locked">
+                    <i class="fas fa-lock"></i>
+                    <span>Speedster</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/vansham0001/Time-Watch-And-Clock" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/vansham-dutta?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BuuZtjKCoT560WcAmie9mCw%3D%3D" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://leetcode.com/u/VanshamDutta/" class="social-link"><i class="fab fa-leetcode"></i></a>
+            </div>
+            <p>Designed For Micro IIT Internship 2025</p>
+            <p>Created By</i> Vansham Dutta</p>
+            <p>Contact: <a href="mailto:vanshamdutta06@gmail.com">vanshamdutta06@gmail.com</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
